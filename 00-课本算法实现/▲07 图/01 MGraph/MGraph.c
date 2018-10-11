@@ -16,9 +16,10 @@
 /*════╗
 ║ 算法7.1║ 
 ╚════*/
-Status CreateGraph_M(FILE *fp, MGraph *G)
+//从文件fp里读出图的信息，并构造图G;
+Status CreateGraph_M(FILE *fp, MGraph *G)      		//MGraph *G 定义了一个MGraph类型的指针变量，此时分配存储空间； 
 {	
-	Scanf(fp, "%d", &((*G).kind));
+	Scanf(fp, "%d", &((*G).kind));					//如第一行 图类型→0（有向图）
 
 	switch((*G).kind)								//随机创建有向图、网或无向图网的一种。 
 	{
@@ -41,31 +42,33 @@ Status CreateDG_M(FILE *fp, MGraph *G)
 	VertexType_M v1, v2;
 	char tmp;
 	
-	Scanf(fp, "%d%d%d", &((*G).vexnum), &((*G).arcnum), &((*G).IncInfo));
-	Scanf(fp, "%c", &tmp);						//跳过换行符 
+	Scanf(fp, "%d%d%d", &((*G).vexnum), &((*G).arcnum), &((*G).IncInfo)); 
 	
-	for(i=1; i<=(*G).vexnum; i++)
+	Scanf(fp, "%c", &tmp);						//跳过换行符, 因为换行符也属于字符类型； 
+
+	for(i=1; i<=(*G).vexnum; i++)				//存储顶点信息；
 		Scanf(fp, "%c", &((*G).vexs[i]));
-	Scanf(fp, "%c", &tmp);						//跳过换行符
 	
-	for(i=1; i<=(*G).vexnum; i++)				//初始化邻接矩阵 
+	Scanf(fp, "%c", &tmp);						//跳过换行符
+
+	for(i=1; i<=(*G).vexnum; i++)				//初始化邻接矩阵, 即零矩阵；
 	{
 		for(j=1; j<=(*G).vexnum; j++)
 			(*G).arcs[i][j].adj = 0;		
 	}
 	
-	for(k=1; k<=(*G).arcnum; k++)
+	for(k=1; k<=(*G).arcnum; k++)				//存储有向图的弧信息；
 	{
-		Scanf(fp, "%c%c", &v1, &v2);
+		Scanf(fp, "%c%c", &v1, &v2);			//弧的集合→◤A，B◢◤B，C◢◤C，A◢◤A，D◢两个两个的字符一起读；
 		
-		i = LocateVex_M(*G, v1);
+		i = LocateVex_M(*G, v1);				//寻找顶点 v1 的位置；
 		j = LocateVex_M(*G, v2);
 		
 		if(!i || !j)
 			return ERROR;
 		
 		(*G).arcs[i][j].adj = 1;
-		if((*G).IncInfo==1)						//若有弧的其他信息，则录入 
+		if((*G).IncInfo==1)						//若有弧的其他信息，则录入; 
 			Input(fp, &((*G).arcs[i][j].info));
 	}
 	
@@ -80,21 +83,22 @@ Status CreateDN_M(FILE *fp, MGraph *G)
 	char tmp;
 	
 	Scanf(fp, "%d%d%d", &((*G).vexnum), &((*G).arcnum), &((*G).IncInfo));
-	Scanf(fp, "%c", &tmp);							//跳过换行符 
+	Scanf(fp, "%c", &tmp);						//跳过换行符 
 	
-	for(i=1; i<=(*G).vexnum; i++)
+	for(i=1; i<=(*G).vexnum; i++)				//存储顶点信息；
 		Scanf(fp, "%c", &((*G).vexs[i]));
-	Scanf(fp, "%c", &tmp);							//跳过换行符
+
+	Scanf(fp, "%c", &tmp);						//跳过换行符
 	
-	for(i=1; i<=(*G).vexnum; i++)					//初始化邻接矩阵 
+	for(i=1; i<=(*G).vexnum; i++)				//初始化邻接矩阵, 全部初始化为无穷大；
 	{
 		for(j=1; j<=(*G).vexnum; j++)
-			(*G).arcs[i][j].adj = INFINITY;		
+			(*G).arcs[i][j].adj = INFINITY;			
 	}
 	
-	for(k=1; k<=(*G).arcnum; k++)
+	for(k=1; k<=(*G).arcnum; k++)				//存储有向网的弧和权的信息；
 	{
-		Scanf(fp, "%c%c%d", &v1, &v2, &w);
+		Scanf(fp, "%c%c%d", &v1, &v2, &w);		//弧的集合→◤A，B，1◢◤A，F，3◢◤B，C，5◢◤C，A，6◢◤C，D，5◢◤D，A，9◢◤D，F，8◢◤E，D，4◢◤F，C，7◢◤F，E，5◢
 		
 		i = LocateVex_M(*G, v1);
 		j = LocateVex_M(*G, v2);
@@ -103,7 +107,7 @@ Status CreateDN_M(FILE *fp, MGraph *G)
 			return ERROR;
 		
 		(*G).arcs[i][j].adj = w;
-		if((*G).IncInfo==1)							//若有弧的其他信息，则录入 
+		if((*G).IncInfo==1)						//若有弧的其他信息，则录入 
 			Input(fp, &((*G).arcs[i][j].info));
 	}
 	
@@ -121,6 +125,7 @@ Status CreateUDG_M(FILE *fp, MGraph *G)
 	
 	for(i=1; i<=(*G).vexnum; i++)
 		Scanf(fp, "%c", &((*G).vexs[i]));
+
 	Scanf(fp, "%c", &tmp);							//跳过换行符
 	
 	for(i=1; i<=(*G).vexnum; i++)					//初始化邻接矩阵 
@@ -183,6 +188,7 @@ Status CreateUDN_M(FILE *fp, MGraph *G)
 			return ERROR;
 		
 		(*G).arcs[i][j].adj = w;
+
 		if((*G).IncInfo==1)							//若有弧的其他信息，则录入 
 			Input(fp, &((*G).arcs[i][j].info));
 		
@@ -199,6 +205,7 @@ void ClearGraph_M(MGraph *G)
 	(*G).IncInfo = 0;
 }
  
+//寻找顶点 u 的位置； 
 int LocateVex_M(MGraph G, VertexType_M u)
 {
 	int i;
@@ -282,6 +289,7 @@ int NextAdjVex_M(MGraph G, VertexType_M v, VertexType_M w)
 	return 0;
 } 
 
+//插入顶点，图有变化，所以用 *G;
 Status InsertVex_M(MGraph *G, VertexType_M v)
 {
 	int i, k, t;
@@ -308,6 +316,7 @@ Status InsertVex_M(MGraph *G, VertexType_M v)
 	return OK;	
 } 
 
+//删除顶点，图有变化，所以用 *G;
 Status DeleteVex_M(MGraph *G, VertexType_M v)
 {
 	int i, j, k, t;
@@ -327,22 +336,22 @@ Status DeleteVex_M(MGraph *G, VertexType_M v)
 		if((*G).arcs[k][i].adj!=t)			//计算新的弧数 
 			(*G).arcnum--;
 		
-		if((*G).kind==DG || (*G).kind==DN)	//有向
+		if((*G).kind==DG || (*G).kind==DN)	//有向，矩阵不对称，行和列都要遍历计算；
 		{
 			if((*G).arcs[i][k].adj!=t)
 				(*G).arcnum--;			
 		} 
 	}
 	
-	for(i=1; i<=(*G).vexnum; i++)
+	for(i=1; i<=(*G).vexnum; i++)			//一行一行的移动；
 	{
-		for(j=k+1; j<=(*G).vexnum; j++)
+		for(j=k+1; j<=(*G).vexnum; j++)		//其中一行的移动操作；
 			(*G).arcs[i][j-1] = (*G).arcs[i][j];
 	}
 	
-	for(i=k+1; i<=(*G).vexnum; i++)
+	for(i=k+1; i<=(*G).vexnum; i++)			//一列一列的移动；
 	{
-		for(j=1; j<=(*G).vexnum-1; j++)
+		for(j=1; j<=(*G).vexnum-1; j++)		//其中一列的移动操作；
 			(*G).arcs[i-1][j] = (*G).arcs[i][j];
 	}
 	
@@ -363,15 +372,15 @@ Status InsertArc_M(MGraph *G, VertexType_M v, VertexType_M w, VRType adj, ...)
 		
 	(*G).arcs[k1][k2].adj = adj;					//弧的信息（相邻？权值？） 
 
-	va_list ap;										//存在弧的其他信息，则录入 
-	va_start(ap, adj);
-	(*G).arcs[k1][k2].info = va_arg(ap, InfoType);	//结构可直接复制	
-	va_end(ap);
+	va_list ap;										//ap 是参数指针；存在弧的其他信息，则录入；
+	va_start(ap, adj);								//指针指向 adj 参数后面的那个参数；
+	(*G).arcs[k1][k2].info = va_arg(ap, InfoType);	//在可变参数列表里"...", 找到 InfoType 类型的参数；结构可直接复制；	
+	va_end(ap);										//关闭参数指针；
 	
-	if((*G).kind==UDG || (*G).kind==UDN)	//无向	
+	if((*G).kind==UDG || (*G).kind==UDN)			//无向	
 		(*G).arcs[k2][k1] = (*G).arcs[k1][k2];
 	
-	(*G).arcnum++;							//弧数增一 
+	(*G).arcnum++;									//弧数增一 
 		
 	return OK;	
 } 
@@ -387,7 +396,7 @@ Status DeleteArc_M(MGraph *G, VertexType_M v, VertexType_M w)
 		return ERROR;
 	
 	if((*G).kind%2)							//网
-		(*G).arcs[k1][k2].adj = INFINITY;
+		(*G).arcs[k1][k2].adj = INFINITY;	
 	else									//图 
 		(*G).arcs[k1][k2].adj = 0;
 	
@@ -421,14 +430,13 @@ void DFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 /*════╗
 ║ 算法7.5║ 
 ╚════*/
-/* 从第 v 个顶点出发，递归地深度优先遍历图 G */
 void DFS_M(MGraph G, int v)
 {
 	int w;
 
 	visited[v] = TRUE;
 
-	VisitFunc(G.vexs[v]);						//访问第 v 个顶点；
+	VisitFunc(G.vexs[v]);
 
 	for(w=FirstAdjVex_M(G, G.vexs[v]); w; w=NextAdjVex_M(G, G.vexs[v], G.vexs[w]))
 	{
