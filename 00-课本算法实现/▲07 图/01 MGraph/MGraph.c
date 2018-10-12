@@ -75,6 +75,7 @@ Status CreateDG_M(FILE *fp, MGraph *G)
 	return OK;	
 }
 
+
 Status CreateDN_M(FILE *fp, MGraph *G)
 {
 	int i, j, k;
@@ -411,6 +412,7 @@ Status DeleteArc_M(MGraph *G, VertexType_M v, VertexType_M w)
 /*════╗
 ║ 算法7.4║ 
 ╚════*/
+//深度优先搜索；
 void DFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 {
 	int v;
@@ -418,11 +420,11 @@ void DFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 	VisitFunc = Visit;
 	
 	for(v=1; v<=G.vexnum; v++)
-		visited[v] = FALSE;					//初始化为未访问
+		visited[v] = FALSE;					//所有的顶点都初始化为未访问
 	
 	for(v=1; v<=G.vexnum; v++)
 	{
-		if(!visited[v])						//未访问
+		if(!visited[v])						//对未访问的顶点进行递归深度遍历；
 			DFS_M(G, v); 
 	} 
 }
@@ -430,15 +432,16 @@ void DFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 /*════╗
 ║ 算法7.5║ 
 ╚════*/
+//从第 v 个顶点出发，递归地深度遍历图 G；
 void DFS_M(MGraph G, int v)
 {
 	int w;
 
-	visited[v] = TRUE;
+	visited[v] = TRUE;				//对正在访问的顶点设置标志位为已访问；
 
-	VisitFunc(G.vexs[v]);
+	VisitFunc(G.vexs[v]);			//访问第 v 个顶点；
 
-	for(w=FirstAdjVex_M(G, G.vexs[v]); w; w=NextAdjVex_M(G, G.vexs[v], G.vexs[w]))
+	for(w=FirstAdjVex_M(G, G.vexs[v]); w; w=NextAdjVex_M(G, G.vexs[v], G.vexs[w]))	//判断条件是顶点 w 存在；
 	{
 		if(!visited[w])
 			DFS_M(G, w);
@@ -448,6 +451,7 @@ void DFS_M(MGraph G, int v)
 /*════╗
 ║ 算法7.6║ 
 ╚════*/
+//按广度优先搜索非递归遍历图 G; 使用辅助队列 Q 和访问标志数组 visited;
 void BFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 {
 	int v, w;
@@ -455,20 +459,20 @@ void BFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 	QElemType_L e;
 	
 	for(v=1; v<=G.vexnum; v++)
-		visited[v] = FALSE;					//初始化为未访问
+		visited[v] = FALSE;					//所有的顶点都初始化为未访问
 	
-	InitQueue_L(&Q);		
+	InitQueue_L(&Q);						//置空辅助队列 Q;		
 	
-	for(v=1; v<=G.vexnum; v++)
+	for(v=1; v<=G.vexnum; v++)				//过程遍历所有顶点；
 	{
-		if(!visited[v])
+		if(!visited[v])						//索引为 v 的顶点尚未被访问；
 		{
-			visited[v] = TRUE;
-			Visit(G.vexs[v]);
-			EnQueue_L(&Q, v);
-			while(!QueueEmpty_L(Q))
+			visited[v] = TRUE;				//首先改变访问标志；
+			Visit(G.vexs[v]);				//访问索引为 v 的顶点；
+			EnQueue_L(&Q, v);				//索引为 v 的顶点入队；
+			while(!QueueEmpty_L(Q))			//while 循环条件，队列不空；
 			{
-				DeQueue_L(&Q, &e);
+				DeQueue_L(&Q, &e);			//用 e 接收出队列的元素值;
 				for(w=FirstAdjVex_M(G, G.vexs[e]); w; w=NextAdjVex_M(G, G.vexs[e], G.vexs[w]))
 				{
 					if(!visited[w])
@@ -477,11 +481,12 @@ void BFSTraverse_M(MGraph G, void(Visit)(VertexType_M))
 						Visit(G.vexs[w]);
 						EnQueue_L(&Q, w);
 					}
-				}
-			}
+				}//for 循环依次访问 e 的未被访问的邻接点，并且入队列；
+			}//while 循环
 		}
 	}
 }
+
 
 void OutputMGraph(MGraph G)
 {

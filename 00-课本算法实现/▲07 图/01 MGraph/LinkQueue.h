@@ -70,9 +70,9 @@ Status EnQueue_L(LinkQueue *Q, QElemType_L e);
 ┗━━━━━━━━*/
 
 Status DeQueue_L(LinkQueue *Q, QElemType_L *e);
-/*━━━━━━━━┓
-┃(08)元素e出队。 ┃
-┗━━━━━━━━*/
+/*━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃(08)用 e 接收出队列的元素值。 ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━*/
 
 void QueueTraverse_L(LinkQueue Q, void(Visit)(QElemType_L));
 /*━━━━━━━┓

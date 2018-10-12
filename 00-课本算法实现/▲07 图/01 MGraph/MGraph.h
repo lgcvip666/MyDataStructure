@@ -103,7 +103,7 @@ int FirstAdjVex_M(MGraph G, VertexType_M v);
 
 int NextAdjVex_M(MGraph G, VertexType_M v, VertexType_M w);
 /*━━━━━━━━━━━━━━━━━━━┓
-┃(11)返回v相对于w的下一个邻接顶点序号。┃
+┃(11)返回v(相对于w)的下一个邻接顶点序号。┃
 ┗━━━━━━━━━━━━━━━━━━━*/
 
 Status InsertVex_M(MGraph *G, VertexType_M v);
