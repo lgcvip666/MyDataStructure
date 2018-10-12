@@ -511,7 +511,6 @@ void OutputMGraph(MGraph G)
 				else
 					printf("%2d ", G.arcs[i][j]);
 			}
-		
 			printf("\n");
 		}
 	}
