@@ -9,7 +9,8 @@
  ************************************/
 
 #include <stdio.h> 
-#include "ALGraph.c" 										//**¡ø07 Í¼**//
+#include <time.h> 
+#include "ALGraph.h" 										//**¡ø07 Í¼**//
 
 void PrintElem(char c);
 

@@ -3,7 +3,8 @@
  * 文件夹: ▲07 图\02 ALGraph *
  * 					          *
  * 文件名: ALGraph.c          *
- *    	    		          *
+ *  
+ * 内  容: 邻接表存储结构      *
  ******************************/
 
 #ifndef ALGRAPH_C
@@ -13,7 +14,7 @@
 
 Status CreateGraph_AL(FILE *fp, ALGraph *G)
 {	
-	Scanf(fp, "%d", &((*G).kind));
+	Scanf(fp, "%d", &((*G).kind));					
 
 	switch((*G).kind)
 	{
@@ -28,26 +29,27 @@ Status CreateGraph_AL(FILE *fp, ALGraph *G)
 
 Status CreateDG_AL(FILE *fp, ALGraph *G)
 {
-	int i, j, k;
-	VertexType_AL v1, v2;
-	char tmp;
-	ArcNode *p;
-	ArcNode *r[MAX_VERTEX_NUM+1];					//作为访问标记，用作定位 
+	int 			i, j, k;
+	VertexType_AL 	v1, v2;
+	char 			tmp;
+	ArcNode			*p;
+	ArcNode 		*r[(*G).vexnum];				//★★作为访问标记，用作定位 
+	// ArcNode 		*r[MAX_VERTEX_NUM+1];			//作为访问标记，用作定位 
 	
 	Scanf(fp, "%d%d%d", &((*G).vexnum), &((*G).arcnum), &((*G).IncInfo));
 	Scanf(fp, "%c", &tmp);							//跳过换行符 
 	
-	for(i=1; i<=(*G).vexnum; i++)
+	for(i=1; i<=(*G).vexnum; i++)					//顶点集→◤A，B，C，D◢
 	{
 		Scanf(fp, "%c", &((*G).vertices[i].data));
-		(*G).vertices[i].firstarc = NULL;
+		(*G).vertices[i].firstarc = NULL;			//firstarc 域都初始化为空；
 		r[i] = NULL;	
 	}
 	Scanf(fp, "%c", &tmp);							//跳过换行符
 	
 	for(k=1; k<=(*G).arcnum; k++)					//读取各边，制作邻接表 
 	{
-		Scanf(fp, "%c%c", &v1, &v2);
+		Scanf(fp, "%c%c", &v1, &v2);				//弧的集合→◤A，B◢◤A，D◢◤B，C◢◤C，A◢
 		
 		i = LocateVex_AL(*G, v1);
 		j = LocateVex_AL(*G, v2);
@@ -55,7 +57,7 @@ Status CreateDG_AL(FILE *fp, ALGraph *G)
 		if(!i || !j)								//保证获取的顶点存在 
 			return ERROR;
 		
-		p = (ArcNode *)malloc(sizeof(ArcNode));
+		p = (ArcNode *)malloc(sizeof(ArcNode));		//生成一个表结点，p 是 ArcNode* 类型的指针；
 		if(!p)
 			exit(OVERFLOW);
 		p->adjvex = j;
@@ -244,6 +246,8 @@ Status InsertVex_AL(ALGraph *G, VertexType_AL v)
 	return OK;	
 } 
 
+
+
 Status DeleteVex_AL(ALGraph *G, VertexType_AL v)
 {
 	int i, k;
@@ -253,12 +257,12 @@ Status DeleteVex_AL(ALGraph *G, VertexType_AL v)
 	if(!k)								//删除的顶点需存在 
 		return ERROR;
 	
-	p = (*G).vertices[k].firstarc;		//释放v的邻接表
+	p = (*G).vertices[k].firstarc;		//释放v的邻接表;
 	while(p)
 	{
 		q = p;
 		p = p->nextarc;
-		DeleteArc_AL(G, v, (*G).vertices[q->adjvex].data); 
+		DeleteArc_AL(G, v, (*G).vertices[q->adjvex].data); //删除和 v 相关的边；
 	}
 	
 	for(i=k+1; i<=(*G).vexnum; i++)		//移动顶点 
@@ -275,7 +279,7 @@ Status DeleteVex_AL(ALGraph *G, VertexType_AL v)
 		{
 			p = (*G).vertices[i].firstarc;
 
-			while(p && p->adjvex<k)
+			while(p && p->adjvex < k)
 			{
 				q = p;
 				p = p->nextarc;
