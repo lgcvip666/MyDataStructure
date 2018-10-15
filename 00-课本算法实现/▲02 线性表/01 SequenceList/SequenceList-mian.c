@@ -7,7 +7,7 @@
  ***************************************/
 
 #include <stdio.h>
-#include "SequenceList.c" 								//**▲02 线性表**//
+#include "SequenceList.h" 								//**▲02 线性表**//
 
 /* 测试调用的函数原型 */
 Status CmpGreater(LElemType_Sq e, LElemType_Sq data);

@@ -136,7 +136,7 @@ Status ListInsert_Sq(SqList *L, int i, LElemType_Sq e)
 	
 	q = &(*L).elem[i-1];				//q为插入位置 
 	
-	for(p=&(*L).elem[(*L).length-1]; p>=q; --p)
+	for(p=&(*L).elem[(*L).length-1]; p>=q; --p) //从最后一个元素开始后移；
 		*(p+1) = *p;					//插入位置及之后的元素右移 
 	
 	*q = e;								//插入e 
@@ -157,9 +157,9 @@ Status ListDelete_Sq(SqList *L, int i, LElemType_Sq *e)
 	
 	p = &(*L).elem[i-1];				//p为被删除元素的位置 
 	*e = *p;
-	q = (*L).elem+(*L).length-1; 		//表尾元素位置 
+	q = (*L).elem+(*L).length-1; 		//表尾元素位置, 这里的指针按元素计算，不是按字节计算，相当于指针p加1； 
 	
-	for(++p; p<=q; ++p)
+	for(++p; p<=q; ++p)					
 		*(p-1) = *p;					//被删元素之后的元素左移 
 
 	(*L).length--;						//表长减1

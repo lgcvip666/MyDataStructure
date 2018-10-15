@@ -5,8 +5,10 @@
  * 文件名: StaticLinkedList.c     *
  * 				     		      *
  * 算  法: 2.13、2.14、2.15、2.16 * 
- *                                *
+ *                               *
  **********************************/
+
+// 参考链接：https://www.cnblogs.com/kangjianwei101/p/5223975.html 
 
 #ifndef STATICLINKEDLIST_C
 #define STATICLINKEDLIST_C
@@ -29,6 +31,7 @@ void InitSpace_SL()						//首先初始化备用空间
 /*═════╗
 ║ 算法2.15 ║ 
 ╚═════*/
+// 将申请到的空间从备用空间中删去; 即SPACE[0].cur永远存放下一个未使用的备用空间；
 int Malloc_SL()							//从备用空间申请结点空间
 {
 	int i;
@@ -37,8 +40,8 @@ int Malloc_SL()							//从备用空间申请结点空间
 
 	if(SPACE[0].cur)				 
 	{ 
-		SPACE[0].cur = SPACE[i].cur;	//将申请到的空间从备用空间中删去 
-		return i;						//返回新申请结点下标
+		SPACE[0].cur = SPACE[i].cur;	//将申请到的空间从备用空间中删去; 即SPACE[0].cur永远存放下一个未使用的备用空间； 
+		return i;						//返回新申请结点下标；
 	}
 	else
 		return 0;						//申请失败返回0 
@@ -53,6 +56,7 @@ void Free_SL(int k) 					//回收k结点空间
 	SPACE[0].cur = k;
 }
 
+// 初始化静态链表，建立头结点;
 Status InitList_SL(SLinkList *H)		//H为头结点指针 
 {
 	*H = Malloc_SL();					//创建头结点 	

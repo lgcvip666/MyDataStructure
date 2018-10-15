@@ -13,21 +13,22 @@
 
 #include <stdio.h>
 #include <stdlib.h>						//提供malloc、realloc、free、exit原型
-#include "../../▲01 绪论/Status.h"		//**▲01 绪论**//
-#include "../../▲01 绪论/Scanf.c"		//**▲01 绪论**//
+#include "Status.h"						//**▲01 绪论**//
 
 /* 单链表类型定义 */
-#ifndef BANKQUEUING_H			/*后续的模拟银行排队算法中，此类型需要重新定义*/
+#ifndef BANKQUEUING_H					/*后续的模拟银行排队算法中，此类型需要重新定义*/
 typedef int LElemType_L;
 
 /* 单链表结构体 */
 typedef struct LNode
 {
-	LElemType_L data;
-	struct LNode* next;
+	LElemType_L 	data;
+	struct LNode 	*next;
 }LNode;
-typedef LNode* LinkList;		//指向单链表结点的指针 
+typedef LNode* 		LinkList;		//指向单链表结点的指针 
 #endif
+
+int Scanf(FILE *fp, char *format, ...);
 
 /* 单链表（带头结点）函数列表 */ 
 Status InitList_L(LinkList *L);

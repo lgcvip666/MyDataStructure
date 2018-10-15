@@ -7,7 +7,7 @@
  *******************************************/
 
 #include <stdio.h> 
-#include "SinglyLinkedList.c" 						//**▲02 线性表**//
+#include "SinglyLinkedList.h" 						//**▲02 线性表**//
 
 /* 函数原型 */
 Status CmpGreater(LElemType_L e, LElemType_L data);	//判断data是否大于e //若data大于e，返回TRUE 

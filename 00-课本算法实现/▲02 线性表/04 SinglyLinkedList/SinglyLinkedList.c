@@ -13,12 +13,34 @@
 
 #include "SinglyLinkedList.h" 			//**▲02 线性表**//
 
-Status InitList_L(LinkList *L)
+/* 由于头结点的指针本身就是个结构指针，
+所以在初始化、创建、销毁等需要改变头结点指针的地方，
+则要注意函数形参为二级指针，即指向头指针的指针; 
+即 LinkList *L 中， *L 为二级指针 */
+
+/* 一级指针：
+LinkList	*L;
+(*L).成员；
+(L)->成员；
+
+二级指针：
+LinkList	**L;
+(**L).成员；
+(*L)->成员；
+
+一般的(狗代表任意级指针):
+指针   *狗；
+(*狗).成员；
+(狗)->成员；
+ */
+
+Status InitList_L(LinkList *L)  
 {
-	(*L) = (LinkList)malloc(sizeof(LNode));
+	(*L) = (LinkList)malloc(sizeof(LNode)); 	// *L 存储指向结点的地址；
 	if(!(*L))
 		exit(OVERFLOW);
 	(*L)->next = NULL;
+	// (**L).next = NULL;  						//访问成员该语句也可以；
 	
 	return OK;
 }
@@ -46,7 +68,7 @@ Status ClearList_L(LinkList L)			//保留头结点
 
 void DestroyList_L(LinkList *L)			//销毁所有结点 
 {
-	LinkList p = *L;	
+	LinkList p = *L;	//p和L一样也是一个二级指针，这里的*的作用是取内容；
 
 	while(p)
 	{
@@ -56,7 +78,7 @@ void DestroyList_L(LinkList *L)			//销毁所有结点
 	}
 }
 
-Status ListEmpty_L(LinkList L)
+Status ListEmpty_L(LinkList L)			//LinkList L 中，L 为指针变量，即头指针，指向头结点；
 {
 	if(L!=NULL && L->next==NULL)		//链表存在且只有头结点 
 		return TRUE;
@@ -72,8 +94,8 @@ int ListLength_L(LinkList L)
 	if(L)
 	{
 		i = 0;
-		p = L->next;
-		while(p)
+		p = L->next;	 //指向第一个结点；
+		while(p)		 //从第一个数据结点开始计算长度；
 		{
 			i++;
 			p = p->next;
@@ -89,7 +111,7 @@ int ListLength_L(LinkList L)
 Status GetElem_L(LinkList L, int i, LElemType_L *e)
 {
 	int j;
-	LinkList p = L->next;
+	LinkList p = L->next;				//含头结点，所以指向第一个结点；
 	
 	j = 1;
 	p = L->next;
@@ -98,7 +120,7 @@ Status GetElem_L(LinkList L, int i, LElemType_L *e)
 	{
 		j++;
 		p = p->next;
-	}
+	}//指针指向第 i 个结点；
 
 	if(!p || j>i)						//第i个元素不存在 
 		return ERROR;
@@ -108,6 +130,7 @@ Status GetElem_L(LinkList L, int i, LElemType_L *e)
 	return OK; 
 }
 
+//返回单链表L中第一个与e满足Compare关系的元素位序;
 int LocateElem_L(LinkList L, LElemType_L e, Status(Compare)(LElemType_L, LElemType_L))
 {
 	int i;
@@ -198,24 +221,25 @@ Status NextElem_L(LinkList L, LElemType_L cur_e, LElemType_L *next_e)
 /*════╗
 ║ 算法2.9║ 
 ╚════*/
+//默认含头结点；
 Status ListInsert_L(LinkList L, int i, LElemType_L e)
 {
 	LinkList p, s;
 	int j;
 	
 	p = L;
-	j = 0; 
+	j = 0; 	//j=0 在头结点的位置；
 	
-	while(p && j<i-1)					//寻找第i-1个结点 
+	while(p && j<i-1)					//p 指向第i-1个结点 
 	{
 		p = p->next;
-		++j;
-	}
+		++j;	
+	}//p 指向第i-1个结点；当做块记住，常用； 
 	
 	if(!p || j>i-1)
 		return ERROR;
 
-	s = (LinkList)malloc(sizeof(LNode));
+	s = (LinkList)malloc(sizeof(LNode));	//生成一个 s 指向的结点；
 	if(!s)
 		exit(OVERFLOW);
 	s->data = e;
@@ -228,24 +252,25 @@ Status ListInsert_L(LinkList L, int i, LElemType_L e)
 /*═════╗
 ║ 算法2.10 ║ 
 ╚═════*/
+//默认含头结点；
 Status ListDelete_L(LinkList L, int i, LElemType_L *e)
 {
 	LinkList pre, p; 
 	int j;
 
 	pre = L;
-	j = 1; 
+	j = 0; 		//j=0 在头结点的位置；
 
-	while(pre->next && j<i)			//寻找第i个结点，并令pre指向其前驱 
+	while(pre->next && j<i-1)			//寻找第i个结点，并令pre指向其前驱 
 	{
 		pre = pre->next;
 		++j;
-	}
+	}//pre 指向第 i-1 个结点；当做块记住，常用；
 	
-	if(!pre->next || j>i)			//删除位置不合理
+	if(!pre->next || j>i)				//删除位置不合理
 		return ERROR;
 
-	p = pre->next;
+	p = pre->next;						//p 指针记录要删除的结点；
 	pre->next = p->next;
 	*e = p->data;
 	free(p);
@@ -260,7 +285,7 @@ Status ListTraverse_L(LinkList L, void(Visit)(LElemType_L))
 	if(!L)
 		return ERROR;
 	else
-		p = L->next;	
+		p = L->next;	//含头结点，所以指向第一个数据结点；
 
 	while(p)
 	{
