@@ -9,7 +9,7 @@
  ******************************/
 
 #include <stdio.h>
-#include "Base.c" 									//**▲09 查找**//
+#include "Base.h" 									//**▲09 查找**//
 
 /* 宏定义 */
 #define Max 10										//查找表中元素个数 

@@ -9,7 +9,7 @@
  **********************************/
 
 #include <stdio.h>
-#include "BinarySortTree.c" 								//**▲09 查找**//
+#include "BinarySortTree.h" 								//**▲09 查找**//
 
 #define Max 7												//查找表中元素个数
 

@@ -11,11 +11,12 @@
 #ifndef BINSEARCH_H
 #define BINSEARCH_H
 
-#include "../00 Base/Base.c" 		//**▲09 查找**//
+#include "Base.h" 		//**▲09 查找**//
 
 /* 宏函数 */
 #define EQ(a,b) ((a)==(b))
 #define LT(a,b) ((a) < (b))
+
  
 /* 折半查找函数列表 */
 int Search_Bin(Table T, KeyType key);

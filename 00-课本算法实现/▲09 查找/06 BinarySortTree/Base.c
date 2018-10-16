@@ -51,7 +51,7 @@ void Traverse(Table T, void(Visit)(ElemType_Search))
 	
 	for(i=0; i<T.length; i++)
 	{
-		if(i && !(i%10))
+		if(i && !(i%10))	// 每输出 10 个元素就换行；
 			printf("\n");
 		
 		Visit(T.elem[i+1]);

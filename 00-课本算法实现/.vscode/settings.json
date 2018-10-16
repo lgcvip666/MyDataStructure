@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "sequencelist.h": "c",
+        "status.h": "c",
+        "singlylinkedlist.h": "c",
+        "staticlinkedlist.h": "c",
+        "base.h": "c",
+        "sequncesearch.h": "c",
+        "binarysorttree.h": "c"
+    }
+}

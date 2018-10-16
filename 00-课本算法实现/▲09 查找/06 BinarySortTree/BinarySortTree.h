@@ -12,7 +12,7 @@
 #define BINARYSORTTREE_H
 
 #include <stdlib.h>
-#include "../00 Base/Base.c" 				//**¡ø09 ²éÕÒ**//
+#include "Base.h" 				//**¡ø09 ²éÕÒ**//
 
 /* ºêº¯Êý */
 #define EQ(a,b) ((a)==(b))

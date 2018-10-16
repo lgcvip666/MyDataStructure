@@ -9,7 +9,7 @@
  ********************************/
 
 #include <stdio.h>
-#include "Binsearch.c" 					//**▲09 查找**//
+#include "Binsearch.h" 					//**▲09 查找**//
 
 #define Max 100							//查找表中元素个数 
 
