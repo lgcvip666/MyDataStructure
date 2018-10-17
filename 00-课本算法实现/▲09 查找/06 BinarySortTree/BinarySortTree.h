@@ -20,6 +20,9 @@
 
 /* 类型定义 */
 typedef ElemType_Search BSTElemType;		//二叉排序树元素类型 
+
+
+//二叉链表存储结构
 typedef struct BSTNode						//二叉排序树存储表示
 {
 	BSTElemType data;

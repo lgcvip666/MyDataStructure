@@ -33,25 +33,26 @@ Status CreateBSTree(BSTree *BST, Table T)
 ╚═════*/
 BSTree SearchBST_1(BSTree BST, KeyType key)
 {
-	if(!BST || EQ(key, BST->data.key))
+	if(!BST || EQ(key, BST->data.key))	//空树或者相等，查找结束;
 		return BST;
-	else if(LT(key, BST->data.key))
+	else if(LT(key, BST->data.key))		//要查找的 key 值小于根节点的 key 值，递归地搜索左子树； 
 		return SearchBST_1(BST->lchild, key);
-	else
+	else								//要查找的 key 值大于根节点的 key 值，递归地搜索右子树； 
 		return SearchBST_1(BST->rchild, key);
 }
 
 /*═════╗
 ║算法9.5(b)║ 
 ╚═════*/
+//p指向查找路径上最后一个“能”被访问结点，f指向BST的双亲，初始值为NULL，即根节点的双亲结点为 NULL;
 Status SearchBST_2(BSTree BST, KeyType key, BSTree f, BSTree *p)
-{//p指向查找路径上最后一个“能”被访问结点，f指向BST的双亲，初始值为NULL 
-	if(!BST)
+{
+	if(!BST)	//二叉排序树为空；
 	{
 		*p = f;
-		return FALSE;
+		return FALSE;		//查找不成功；
 	}
-	else if(EQ(key, BST->data.key))
+	else if(EQ(key, BST->data.key))                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 	{
 		*p = BST;
 		return TRUE;
@@ -65,6 +66,7 @@ Status SearchBST_2(BSTree BST, KeyType key, BSTree f, BSTree *p)
 /*════╗
 ║ 算法9.6║ 
 ╚════*/
+//插入 e 到二叉排序树;
 Status InsertBST(BSTree *BST, BSTElemType e)
 {
 	BSTree p, s;
