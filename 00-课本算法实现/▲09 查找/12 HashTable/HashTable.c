@@ -13,6 +13,7 @@
 
 #include "HashTable.h" 				//**▲09 查找**//
 
+//初始化哈希表；
 void InitHash(HashTable *H)
 {
 	(*H).count = 0;
