@@ -47,7 +47,7 @@ BSTree SearchBST_1(BSTree BST, KeyType key)
 //p指向查找路径上最后一个“能”被访问结点，f指向BST的双亲，初始值为NULL，即根节点的双亲结点为 NULL;
 Status SearchBST_2(BSTree BST, KeyType key, BSTree f, BSTree *p)
 {
-	if(!BST)	//二叉排序树为空；
+	if(!BST)				//二叉排序树为空；
 	{
 		*p = f;
 		return FALSE;		//查找不成功；
@@ -71,7 +71,7 @@ Status InsertBST(BSTree *BST, BSTElemType e)
 {
 	BSTree p, s;
 	 
-	if(!SearchBST_2(*BST, e.key, NULL, &p))		//查找不成功 
+	if(!SearchBST_2(*BST, e.key, NULL, &p))		//查找不成功, 
 	{
 		s = (BSTree)malloc(sizeof(BSTNode));
 		s->data = e;

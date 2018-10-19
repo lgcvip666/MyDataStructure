@@ -6,6 +6,7 @@
         "staticlinkedlist.h": "c",
         "base.h": "c",
         "sequncesearch.h": "c",
-        "binarysorttree.h": "c"
+        "binarysorttree.h": "c",
+        "hashtable.h": "c"
     }
 }

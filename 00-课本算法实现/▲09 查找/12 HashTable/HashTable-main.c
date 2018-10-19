@@ -9,7 +9,7 @@
  **********************************/
 
 #include <stdio.h>
-#include "HashTable.c" 						//**▲09 查找**//
+#include "HashTable.h" 						//**▲09 查找**//
 
 #define Max 20								//查找表中元素个数 
 
