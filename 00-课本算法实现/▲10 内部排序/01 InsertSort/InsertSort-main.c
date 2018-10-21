@@ -9,7 +9,7 @@
  ************************************/
 
 #include <stdio.h>
-#include "InsertSort.c" 						//**▲10 内部排序**//
+#include "InsertSort.h" 						//**▲10 内部排序**//
 
 void PrintKey(KeyType e);
 

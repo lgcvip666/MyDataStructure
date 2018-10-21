@@ -11,7 +11,7 @@
 #ifndef INSERTSORT_H
 #define INSERTSORT_H
 
-#include "../00 SequenceListType/SequenceListType.c"	//**▲10 内部排序**//
+#include "SequenceListType.h"	//**▲10 内部排序**//
 
 /* 直接插入排序函数列表 */
 void InsertSort(SqList_sort *L);

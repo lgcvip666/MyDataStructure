@@ -7,6 +7,9 @@
         "base.h": "c",
         "sequncesearch.h": "c",
         "binarysorttree.h": "c",
-        "hashtable.h": "c"
+        "hashtable.h": "c",
+        "sequencelisttype.h": "c",
+        "scanf.c": "cpp",
+        "staticlinkedlisttype.h": "c"
     }
 }

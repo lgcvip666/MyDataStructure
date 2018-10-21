@@ -13,8 +13,7 @@
 
 #include <stdio.h>
 #include <limits.h>
-#include "../../▲01 绪论/Status.h"			//**▲01 绪论**//
-#include "../../▲01 绪论/Scanf.c"			//**▲01 绪论**//
+#include "Status.h"							//**▲01 绪论**//
 
 /* 宏定义 */
 #define MAXSIZE 100							//静态链表容量  
@@ -38,6 +37,8 @@ typedef struct
 	SLNode r[MAXSIZE];						//0号单元为表头结点 
 	int length;								//链表当前长度 
 }SLinkList_sort;							//静态链表类型 
+
+int Scanf(FILE *fp, char *format, ...);
 
 /* 静态链表存储结构函数列表 */
 Status CreateSortList(FILE *fp, SLinkList_sort *L);

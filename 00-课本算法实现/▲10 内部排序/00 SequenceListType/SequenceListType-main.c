@@ -9,7 +9,7 @@
  ***********************************/
 
 #include <stdio.h>
-#include "SequenceListType.c" 	//**▲10 内部排序**//
+#include "SequenceListType.h" 	//**▲10 内部排序**//
 
 void PrintKey(KeyType e);
 

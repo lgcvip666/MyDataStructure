@@ -9,7 +9,7 @@
  ***************************************/
 
 #include <stdio.h>
-#include "StaticLinkedListType.c" 	//**▲10 内部排序**//
+#include "StaticLinkedListType.h" 	//**▲10 内部排序**//
 
 void PrintKey(KeyType e);
 
